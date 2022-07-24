@@ -49,6 +49,10 @@ namespace ConnectFour.App
                 {
                     consecutiveCount++;
                 }
+                else
+                {
+                    consecutiveCount = 0;
+                }
 
                 if (consecutiveCount == 4)
                 {
