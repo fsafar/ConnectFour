@@ -8,6 +8,7 @@ namespace ConnectFour.App
 {
     public class Game
     {
+        //Create list of cells
         List<Cell> cells = new List<Cell>();
 
         int boardHeight = 6;
@@ -83,7 +84,31 @@ namespace ConnectFour.App
 
         private bool IsVerticalWin()
         {
-            throw new NotImplementedException();
+            var currentRowCells = cells
+                .Where(cell => cell.Coordinate.Y == latestTurn.Coordinate.Y)
+                .OrderBy(cell => cell.Coordinate.X)
+                .ToList();
+
+            var consecutiveCount = 0;
+
+            foreach (var cell in currentRowCells)
+            {
+                if (cell.Value == latestTurn.Value)
+                {
+                    consecutiveCount++;
+                }
+                else
+                {
+                    consecutiveCount = 0;
+                }
+
+                if (consecutiveCount == 4)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private bool IsDiagonalWin()
